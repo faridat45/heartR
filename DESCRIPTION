@@ -4,13 +4,13 @@ Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
   person("Faridat", "Adeniji", email="faridaadeniji@gmail.com", role=c("aut", "cre")),
-  person("Ciara", "Olohan", email="ciara.olohan.2023@mumail.ie", c("aut")),
+  person("Ciara", "Olohan", email="ciara.olohan.2023@mumail.ie", role =c("aut")),
   person("Irene", "Adetola", email="Irene.adetola.2021@mumail.ie", role=c("aut")),
   person("Boluwatife", "Farombi", email="boluwatife.farombi.2023@mumail.ie", role=c("aut"))
   )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
-License: What license is it under?
+License:  GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Depends: 
