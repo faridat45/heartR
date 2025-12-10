@@ -1,12 +1,4 @@
 
-<<<<<<< HEAD
-=======
-# stats :: median, quantile, sd, var
-# gt :: boatload of functions
-# dplyr :: everything()
-# utils :: tail
-
->>>>>>> 8c47d97be982c08df3d4df4d87dde2bc0b8b86ff
 summ_heartr <- function(...){
   input <- list(...)
 
