@@ -1,24 +1,27 @@
-Package: HeartR
 Type: Package
+Package: HeartR
 Title: What the Package Does (Title Case)
 Version: 0.1.0
 Authors@R: c(
-  person("Faridat", "Adeniji", email="faridaadeniji@gmail.com", role=c("aut", "cre")),
-  person("Ciara", "Olohan", email="ciara.olohan.2023@mumail.ie", role =c("aut")),
-  person("Irene", "Adetola", email="Irene.adetola.2021@mumail.ie", role=c("aut")),
-  person("Boluwatife", "Farombi", email="boluwatife.farombi.2023@mumail.ie", role=c("aut"))
+    person("Faridat", "Adeniji", , "faridaadeniji@gmail.com", role = c("aut", "cre")),
+    person("Ciara", "Olohan", , "ciara.olohan.2023@mumail.ie", role = "aut"),
+    person("Irene", "Adetola", , "Irene.adetola.2021@mumail.ie", role = "aut"),
+    person("Boluwatife", "Farombi", , "boluwatife.farombi.2023@mumail.ie", role = "aut")
   )
 Description: More about what it does (maybe more than one line).
     Continuation lines should be indented.
 License: GPL (>= 3)
-Encoding: UTF-8
-LazyData: true
+URL: https://github.com/faridat45/heartR.git
 Depends: 
     R (>= 4.5.0)
 Imports:
-  dplyr,
-  gt,
-  ggplot2, 
-  plotly,
-  MASS
+    dplyr,
+    ggplot2,
+    gt,
+    MASS,
+    plotly,
+    stats,
+    utils
+Encoding: UTF-8
+LazyData: true
 RoxygenNote: 7.3.3

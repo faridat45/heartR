@@ -1,28 +1,60 @@
 # dealing with 'no visible binding' note as recommended in lecture 11
-utils::globalVariables(c("heart_dat","p_hat"))
+utils::globalVariables(c("p_hat","heart_dat"))
 
 #' Simulation
 #'
-#' This function generates reproducible synthetic datasets
+#' This function generates reproducible synthetic datasets, suitable for binary
+#' classification. The current version only works for datasets in which the response
+#' variable has exactly two possible values.
 #'
-#' @param seed random seed
-#' @param n number of rows to data
+#' @param seed random seed for reproducibility
+#' @param n number of rows in the synthetic datasets.Deaults to the number of rows in
+#' \code{data}.
+#' @param data dataset the user wishes to replicate. If \code{NULL}, a heart
+#' disease dataset is used.
+#' @param contVars character vector of continuous numeric variables in \code{data}.
+#' If \code{NULL} then all numeric variables are used.
+#' @param catVars character vector of categorical variables in \code{data}. If
+#' \code{NULL} then all factor or categorical variables, excluding the outcome,
+#' are used
+#' @param outcome_model fitted binary logistic regression model. If \code{NULL}
+#' a logistic regression model is fit using \code{glm()}
+#' @param outcome name of the binary outcome variable in \code{data}
+#' @param mu optional named vector of means used to simulate continuous variables.
+#' @param sigma optional covariance matrix to simulate continuous variables.
 #'
 #' @return A synthetic dataset with continuous, categorical and outcome variables
 #'
 #' @importFrom MASS mvrnorm
-#' @importFrom stats glm cov predict binomial median IQR
+#' @importFrom stats glm cov predict binomial median IQR as.formula
 #' @importFrom utils data
-#' @importFrom dplyr mutate select
+#' @importFrom dplyr select setdiff
+#'
 #' @export
-simulation <- function(seed = 403, n = NULL){
+#' @author Faridat Adeniji - <\email{faridaadeniji@@gmail.com}>
+#' @examples
+#' sim_data <- simulation(seed = 123)
+#' sim_data2 <- simulation(seed = 23, n = 50)
+#' sim_mtcars <- simulation(data = mtcars, outcome = "am")
+simulation <- function(seed = 403, n = NULL,
+                       data = NULL,
+                       contVars = NULL,
+                       catVars = NULL,
+                       outcome_model = NULL,
+                       outcome = "Heart_Disease",
+                       mu = NULL, sigma = NULL){
+  if(is.null(data)){
     data("heart_dat", package = "HeartR", envir = environment())
+    data <- heart_dat
+  }
+  set.seed(seed)
 
   if(is.null(n)){
-    n <- nrow(heart_dat)
+    n <- nrow(data)
   }
-
-  set.seed(seed)
+  if(is.null(contVars)){
+    contVars <- names(data[sapply(data,is.numeric)])
+  }
 
   bounds <-function(x,min,max){
     x[x<min] <- min
@@ -30,71 +62,80 @@ simulation <- function(seed = 403, n = NULL){
     return(x)
   }
 
-  ## do it by default
-  ## don't do it based on the data
-  ## ensure the users have some control
-  ## what if they want to build their own data
-  ## set default mu and sigma and all in the parameters
+  bounds2 <- lapply(contVars, function(x){
+    c(
+      min = min(data[[x]], na.rm = TRUE),
+      max = max(data[[x]], na.rm = TRUE)
+    )
+  })
+  names(bounds2) <- contVars
 
-  contVars <- c("Age", "Weight", "Height", "Systolic_BP", "Diastolic_BP","Heart_Rate",
-                "Blood_Sugar_Fasting", "Cholesterol_Total", "BMI")
-  mu <- colMeans(heart_dat[, contVars])
-  sigma <- cov(heart_dat[, contVars]) # covariance matrix
+  defaultMU <- colMeans(data[, contVars])
+
+  if(!is.null(mu)){
+    if(is.null(names(mu))){
+      stop("mu must be a named vector")
+    }
+    defaultMU[names(mu)] <- mu
+  }
+  mu <- defaultMU
+
+  # covariance matrix
+  if(is.null(sigma)){
+    sigma <- cov(data[, contVars])
+  }else{
+    if(!is.matrix(sigma)){
+      stop("sigma should be a covariance matrix")
+    }
+  }
 
   # multivariate normal data
   contData <- MASS::mvrnorm(n, mu,sigma)
-  # to make sure there are no decimals. We wouldn't say someone is 34.8715 years old
   contData <- as.data.frame(round(contData))
-  # View(contData)
 
-  contData$Age <- bounds(contData$Age,30,80)
-  contData$Weight <- bounds(contData$Weight, 50, 119)
-  contData$Height <- bounds(contData$Height,150,199)
-  contData$Systolic_BP <- bounds(contData$Systolic_BP, 100, 179)
-  contData$Diastolic_BP <- bounds(contData$Diastolic_BP, 60,119)
-  contData$Heart_Rate <- bounds(contData$Heart_Rate, 60,109)
-  contData$Blood_Sugar_Fasting <- bounds(contData$Blood_Sugar_Fasting, 70, 179)
-  contData$Cholesterol_Total <- bounds(contData$Cholesterol_Total, 150, 299)
-  contData$BMI <- bounds(contData$BMI, 18, 40)
+  for(x in contVars){
+    contData[[x]] <- bounds(contData[[x]], bounds2[[x]]["min"], bounds2[[x]]["max"])
+  }
 
-  # n <- nrow(heart_dat)
-  gender_prob <- prop.table(table(heart_dat$Gender))
-  smoking_prob <- prop.table(table(heart_dat$Smoking))
-  alcohol_prob <- prop.table(table(heart_dat$Alcohol_Intake))
-  activity_prob <- prop.table(table(heart_dat$Physical_Activity))
-  diet_prob <- prop.table(table(heart_dat$Diet))
-  stress_prob <- prop.table(table(heart_dat$Stress_Level))
-  hypertension_prob <- prop.table(table(heart_dat$Hypertension))
-  diabetes_prob <- prop.table(table(heart_dat$Diabetes))
-  hyperlipidemia_prob <- prop.table(table(heart_dat$Hyperlipidemia))
-  family_prob <- prop.table(table(heart_dat$Family_History))
-  prevHA_prob <- prop.table(table(heart_dat$Previous_Heart_Attack))
+  # automatically finding names of categorical variables
+  if(is.null(catVars)){
+    catVars <- names(data[sapply(data, function(x) is.factor(x) || is.character(x))])
+    catVars <- setdiff(catVars, outcome) #remove response var in case it's in catVars
+  }
+  catData <- lapply(catVars, function(x){
+    probs <- prop.table(table(data[[x]]))
+    sample(names(probs), n, replace = TRUE, prob = probs)
+  })
+  catData <- as.data.frame(catData)
+  names(catData) <- catVars
 
-  Gender <- sample(names(gender_prob), n, replace = TRUE, prob = gender_prob)
-  Smoking <- sample(names(smoking_prob), n, replace = TRUE, prob = smoking_prob)
-  Alcohol_Intake <- sample(names(alcohol_prob), n, replace = TRUE, prob = alcohol_prob)
-  Physical_Activity <- sample(names(activity_prob), n, replace = TRUE, prob = activity_prob)
-  Diet <- sample(names(diet_prob), n, replace = TRUE, prob = diet_prob)
-  Stress_Level <- sample(names(stress_prob), n, replace = TRUE, prob = stress_prob)
-  Hypertension <- sample(names(hypertension_prob), n, replace = TRUE, prob = hypertension_prob)
-  Diabetes <- sample(names(diabetes_prob), n, replace = TRUE, prob = diabetes_prob)
-  Hyperlipidemia <- sample(names(hyperlipidemia_prob), n, replace = TRUE, prob = hyperlipidemia_prob)
-  Family_History <- sample(names(family_prob), n, replace = TRUE, prob = family_prob)
-  Previous_Heart_Attack <- sample(names(prevHA_prob), n, replace = TRUE, prob = prevHA_prob)
 
-  synthetic_data <- data.frame(contData,Gender,Smoking,Alcohol_Intake,
-                               Physical_Activity,Diet, Stress_Level,Hypertension,Diabetes,
-                               Hyperlipidemia,Family_History,Previous_Heart_Attack)
 
-  # View(synthetic_data)
+  #synthetic_data <- data.frame(contData,Gender,Smoking,Alcohol_Intake,
+                               #Physical_Activity,Diet, Stress_Level,Hypertension,Diabetes,
+                               #Hyperlipidemia,Family_History,Previous_Heart_Attack)
+  if(!length(catData) == 0 && !length(contData) == 0)
+  {
+    synthetic_data <- cbind(contData, catData)
+  }else if(length(catData) == 0 && !length(contData) == 0){
+    synthetic_data <- contData
 
-  full_logistic_reg <- glm(Heart_Disease ~ ., family = binomial, data = heart_dat)
+  }else if(!length(catData) == 0 && length(contData) == 0){
+    synthetic_data <- catData
+  }
 
-  # Predictions on synthetic data
+  if(is.null(outcome_model)){
+    if(length(unique(data[[outcome]])) != 2){
+      stop("outcome_model currently only works for binary outcomes")
+    }
+    formula <- as.formula(paste(outcome,"~."))
+    outcome_model <- glm(formula, family = binomial, data = data)
+  }
+
+  synthetic_data$p_hat <- predict(outcome_model, newdata = synthetic_data, type = "response")
+  synthetic_data[[outcome]] <- ifelse(synthetic_data$p_hat >= 0.5, 1, 0)
   synthetic_data <- synthetic_data |>
-    mutate(p_hat = predict(full_logistic_reg, newdata = synthetic_data, type = "response"),
-           Heart_Disease = ifelse(p_hat >= 0.5, 1, 0))|>
-    select(-p_hat)
+  select(-p_hat)
 
   return(synthetic_data)
 

@@ -4,16 +4,56 @@
 \alias{simulation}
 \title{Simulation}
 \usage{
-simulation(seed = 403, n = NULL)
+simulation(
+  seed = 403,
+  n = NULL,
+  data = NULL,
+  contVars = NULL,
+  catVars = NULL,
+  outcome_model = NULL,
+  outcome = "Heart_Disease",
+  mu = NULL,
+  sigma = NULL
+)
 }
 \arguments{
-\item{seed}{random seed}
+\item{seed}{random seed for reproducibility}
 
-\item{n}{number of rows to data}
+\item{n}{number of rows in the synthetic datasets.Deaults to the number of rows in
+\code{data}.}
+
+\item{data}{dataset the user wishes to replicate. If \code{NULL}, a heart
+disease dataset is used.}
+
+\item{contVars}{character vector of continuous numeric variables in \code{data}.
+If \code{NULL} then all numeric variables are used.}
+
+\item{catVars}{character vector of categorical variables in \code{data}. If
+\code{NULL} then all factor or categorical variables, excluding the outcome,
+are used}
+
+\item{outcome_model}{fitted binary logistic regression model. If \code{NULL}
+a logistic regression model is fit using \code{glm()}}
+
+\item{outcome}{name of the binary outcome variable in \code{data}}
+
+\item{mu}{optional named vector of means used to simulate continuous variables.}
+
+\item{sigma}{optional covariance matrix to simulate continuous variables.}
 }
 \value{
 A synthetic dataset with continuous, categorical and outcome variables
 }
 \description{
-This function generates reproducible synthetic datasets
+This function generates reproducible synthetic datasets, suitable for binary
+classification. The current version only works for datasets in which the response
+variable has exactly two possible values.
+}
+\examples{
+sim_data <- simulation(seed = 123)
+sim_data2 <- simulation(seed = 23, n = 50)
+sim_mtcars <- simulation(data = mtcars, outcome = "am")
+}
+\author{
+Faridat Adeniji - <\email{faridaadeniji@gmail.com}>
 }
