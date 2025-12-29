@@ -1,39 +1,39 @@
-summ_heartr <- function(x, type) {
-  if( !is.numeric(x)) {
-    warning ("argument is not numeric") }
+summ_heartr <- function(...){
+  input <- list(...)
 
-   if ( type == "mean") {
-   Mean <- mean(x)
-  class(Mean) <- "mean"
-  return(Mean) }
+  names1 <- sapply(substitute(list(...))[-1], deparse)
+  newnames <- sapply(names1, function(y){
+    splitname <- strsplit(y, "\\$")[[1]]
+    utils::tail(splitname, 1)
+  })
 
-  if ( type == "median") {
-    Median <- median(x)
-  class(Median) <- "median"
-  return(Median)}
+  summ <- function(x, name){
+    if(!is.numeric(x)) warning("argument is not numeric")
 
-  if ( type == "maximim") {
-    Max <- max(x)
-    class(Max) <- "maximum"
-    return(Max)}
+    data.frame(
+      Variable = name,
+      Mean = mean(x),
+      Minimum = min(x),
+      Q1 = stats::quantile(x, 0.25),
+      Median = stats::median(x),
+      Q3 = stats::quantile(x),
+      Maximum = max(x),
+      SD = stats::sd(x),
+      Var = stats::var(x)
+    )
+  }
 
-  if ( type == "minimum") {
-    Min <- min(x)
-    class(Min) <- "minimum"
-    return(Min)}
+  if(length(input) == 1) {
+    finalsumm <- summ(input[[1]], newnames[1])
+    class(finalsum) <- "summ_heartr"
+    return(finalsumm)
+  }
 
-  if ( type == "iqr") {
-    iqr <- IQR(x)
-    class(iqr) <- "iqr"
-    return(iqr)}
+  if (length(input) > 1) {
+    list_output <- mapply(summ, input, name = newnames, SIMPLIFY = FALSE)
+
+    finalsumm <- do.call(rbind, list_output)
+    class(finalsumm <- "summ_heartr")
+    return(finalsumm)
+  }
 }
-
-
-
-
-
-
-#summaries to add
-#five num, PLUS MORE
-
-
