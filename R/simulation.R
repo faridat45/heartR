@@ -1,5 +1,4 @@
 # dealing with 'no visible binding' note as recommended in lecture 11
-# testing commit
 utils::globalVariables(c("p_hat","heart_dat"))
 
 #' Simulation
