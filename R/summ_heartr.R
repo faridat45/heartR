@@ -1,3 +1,24 @@
+#' summ_heartr
+#'
+#' Creates a list of the following summary statistics for one or more numeric variables:
+#' mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard deviation and variance.
+#'
+#' @param ... One or more numeric variables.
+#'
+#' @returns An object of class summ_heartr containing the following statistics for each input variable:
+#' mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard deviation and variance.
+#'
+#' @note A dedicated \code{\link{print.summ_heartr}} method is provided for objects of class \code{"summ_heartr"}.
+#'
+#' @seealso \code{\link{print.summ_heartr}}
+#' @export
+#' @author Ciara Olohan - <\email{ciara.olohan.2023@@mumail.ie}>
+#' @importFrom stats "quantile" "median" "sd" "var"
+#' @examples
+#' weight_height_bmisumm <- summ_heartr(heart_dat$Weight, heart_dat$Height, heart_dat$BMI)
+#'
+#'
+#'
 summ_heartr <- function(...){
   input <- list(...)
 

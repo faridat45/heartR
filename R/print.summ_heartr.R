@@ -1,7 +1,30 @@
+#' print.summ_heartr
+#'
+#' Provides a nice tabulation for the output of  code{link{summ_heartr}}.
+#'
+#' @param x An object of class \code{"summ_heartr"} outputted from the \code{link{summ_heartr}} function.
+#' @param ... Catches unused arguments to \code{print} (not currently implemented).
+#'
+#' @return An aesthetically pleasing table nicely displaying the summary statistics.
+#'
+#' @export
+#' @importFrom gt "gt" "tab_header" "md" "cols_label" "tab_style" "cell_borders" "cols_width"
+#' "px" "cells_body" "cell_fill" "opt_table_font" "google_font" "cols_align"
+#' @importFrom dplyr "everything"
+#' @author Ciara Olohan - <\email{ciara.olohan.2023@@mumail.ie}>
+#' @seealso \code{\link{print}}, \code{\link{summ_heartr}}
+#' @examples
+#' # example code
+#'
+#'
+#'
+#'
+#'
+
+
 # dealing with 'no visible binding' note as recommended in lecture 11
 utils::globalVariables("Variable")
 
-#' @export
 print.summ_heartr<- function(x, ...) {
 
 
