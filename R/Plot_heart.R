@@ -124,11 +124,7 @@ plot_heart <- function(data,
   )
 }
 
-# the relationship of the numeric predictors to the response
-plot_heart(heart, "scatter", var_x = "BMI", var_y = "Age")
-plot_heart(heart, "boxplot", var_x = "Age")
-plot_heart(heart, "hist", var_x = "BMI") # histogram of BMI
-plot_heart(heart, "correlation") # correlation of heart dataset
+
 
 
 
