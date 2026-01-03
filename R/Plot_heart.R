@@ -135,7 +135,7 @@ model <- function(x, method = c("glm", "rf")) {
 #' plot_heart(heart, type = "correlation")
 #'
 #' @export
-library(ggplot2)
+
 
 plot_heart <- function(heart, type = c("hist", "density", "scatter", "boxplot", "correlation"),
                        var_x = NULL, var_y = NULL) {
@@ -189,10 +189,4 @@ plot_heart <- function(heart, type = c("hist", "density", "scatter", "boxplot", 
          }
   )
 }
-# the relationship of the numeric predictors to the response
-plot_heart(heart, "scatter", var_x = "BMI", var_y = "Age")
-plot_heart(heart, "boxplot", var_x = "Age")
-plot_heart(heart, "hist", var_x = "BMI") # histogram of BMI
-plot_heart(heart, "correlation") # correlation of heart dataset
-
 
