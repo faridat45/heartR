@@ -15,7 +15,7 @@
 #' @author Ciara Olohan - <\email{ciara.olohan.2023@@mumail.ie}>
 #' @importFrom stats "quantile" "median" "sd" "var"
 #' @examples
-#' summ_heartr(heart_dat$Weight, heart_dat$Height, heart_dat$BMI)
+#' summ_heartr(heart_dat$age, heart_dat$cholesterol)
 #'
 #'
 #'
@@ -59,5 +59,4 @@ summ_heartr <- function(...){
   }
 }
 
-summ_heartr(heart_dat$Age)
 
