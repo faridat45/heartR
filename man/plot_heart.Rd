@@ -53,14 +53,14 @@ This function is designed to help explore which predictors have an impact heart 
 (1 = highest, 0 = lowest)
 }
 \examples{
-data("heart_dat_old", package = "HeartR")
-heart <- heart_dat_old
+data("heart_dat", package = "HeartR", envir = environment())
+heart <- heart_dat
 # Histogram
-plot_heart(heart, "hist", var_x = "BMI")
+plot_heart(heart, "hist", var_x = "cholesterol")
 # Density
-# plot_heart(heart, "density", var_x = "Age")
+# plot_heart(heart, "density", var_x = "age")
 # Boxplot: categorical vs numeric
-plot_heart(heart, "boxplot", var_x = "Age", var_y = "Heart_Disease")
+plot_heart(heart, "boxplot", var_x = "age", var_y = "target")
 # Correlation matrix
 plot_heart(heart, "correlation")
 

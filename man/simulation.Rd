@@ -51,15 +51,15 @@ sim_data <- simulation(seed = 123)
 
 sim_data2 <- simulation(seed = 23, n = 50)
 
-sim_data3 <- simulation(data, n = 100,
+sim_data3 <- simulation(data = heart_dat, n = 100,
   mu = c(age = 55, cholesterol = 220, restingBP = 130))
 
-sim_dat4 <- simulation(data, n = 80,
+sim_dat4 <- simulation(data = heart_dat, n = 80,
 contVars = c("age", "cholesterol","restingBP"),
 catVars = c("sex","chestPT","exerAngina")
 )
 
-sim_dat5 <- simulation(data, n = 80,
+sim_dat5 <- simulation(data = heart_dat, n = 80,
 contVars = c("age", "cholesterol","restingBP"),
 catVars = c("sex","chestPT","exerAngina"),
 sigma = cov(heart_dat[, c("age", "cholesterol","restingBP")])
