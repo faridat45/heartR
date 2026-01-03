@@ -22,6 +22,8 @@
 summ_heartr <- function(...){
   input <- list(...)
 
+  if(!is.numeric(input)) stop("argument is not numeric")
+
   names1 <- sapply(substitute(list(...))[-1], deparse)
   newnames <- sapply(names1, function(y){
     splitname <- strsplit(y, "\\$")[[1]]
@@ -29,7 +31,7 @@ summ_heartr <- function(...){
   })
 
   summ <- function(x, name){
-    if(!is.numeric(x)) warning("argument is not numeric")
+
 
     data.frame(
       Variable = name,
