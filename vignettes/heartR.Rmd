@@ -107,9 +107,10 @@ This is a function that plots interactive histograms to compare the mean and med
 
 The `print.summ_heartr` method prints the output of `summ_heartr` in a formatted and visually appealing table cuatomisable by font and colour.
 
-```{r, eval=FALSE}
+```{r, results='hide'}
 bpage_summary <- summ_heartr(heart_dat$restingBP , heart_dat$age)
 print(bpage_summary, bordercolour = "purple", fillcolour = "pink")
 ```
+
 
 
