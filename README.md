@@ -27,7 +27,7 @@ You can install the development version of HeartR from
 
 ``` r
 # install.packages("pak")
-pak::pak("faridat45/heartR")
+pak::pak("faridat45/HeartR")
 ```
 
 ## Example

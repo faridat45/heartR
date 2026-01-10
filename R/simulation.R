@@ -32,11 +32,22 @@ utils::globalVariables(c("p_hat","heart_dat"))
 #'
 #' @export
 #' @author Faridat Adeniji - <\email{faridaadeniji@@gmail.com}>
+#'
+#' @note
+#'
+#' Datasets like \code{mtcars} contains no categorical variables. However, variables
+#' (e.g. \code{cyl}, \code{gear}) may be considered to be of that nature. Ensure
+#' variables in any dataset is of the correct type before passing it to this function.
+#'
 #' @examples
+#' \dontrun{
+#'   sim_mtcars <- simulation(data = mtcars, outcome = "am")
+#' }
 #'
 #' sim_data <- simulation(seed = 123)
 #'
 #' sim_data2 <- simulation(seed = 23, n = 50)
+#' sim_data2
 #'
 #' sim_data3 <- simulation(
 #'   data = heart_dat,
@@ -51,15 +62,14 @@ utils::globalVariables(c("p_hat","heart_dat"))
 #'   catVars = c("sex","chestPT","exerAngina")
 #' )
 #'
-# sim_dat5 <- simulation(
-#   data = heart_dat,
-#   n = 100,
-#   contVars = c("age", "cholesterol","restingBP"),
-#   catVars = c("sex","chestPT","exerAngina"),
-#   sigma = cov(heart_dat[, c("age", "cholesterol","restingBP")])
-# )
+#' sim_dat5 <- simulation(
+#'   data = heart_dat,
+#'   n = 100,
+#'   contVars = c("age", "cholesterol","restingBP"),
+#'   catVars = c("sex","chestPT","exerAngina"),
+#'   sigma = cov(heart_dat[, c("age", "cholesterol","restingBP")])
+#'  )
 #'
-#' sim_mtcars <- simulation(data = mtcars, outcome = "am")
 simulation <- function(seed = 403, n = NULL,
                        data = NULL,
                        contVars = NULL,
@@ -67,9 +77,9 @@ simulation <- function(seed = 403, n = NULL,
                        outcome = "target",
                        thres = 0.5,
                        mu = NULL, sigma = NULL){
-  # Load heart dataset if data = NULL
+
   if(is.null(data)){
-    utils::data("heart_dat", package = "HeartR", envir = environment())
+    utils::data("heart_dat", package = "HeartR")
     data <- heart_dat
   }
   set.seed(seed)

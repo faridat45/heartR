@@ -29,7 +29,7 @@ You can install the development version of HeartR from [GitHub](https://github.c
 
 ```{r, eval=FALSE}
 # install.packages("pak")
-pak::pak("faridat45/heartR")
+pak::pak("faridat45/HeartR")
 ```
 
 ## Example

@@ -49,11 +49,20 @@ This function generates reproducible synthetic datasets, suitable for binary
 classification. The current version only works for datasets in which the response
 variable has exactly two possible values.
 }
+\note{
+Datasets like \code{mtcars} contains no categorical variables. However, variables
+(e.g. \code{cyl}, \code{gear}) may be considered to be of that nature. Ensure
+variables in any dataset is of the correct type before passing it to this function.
+}
 \examples{
+\dontrun{
+  sim_mtcars <- simulation(data = mtcars, outcome = "am")
+}
 
 sim_data <- simulation(seed = 123)
 
 sim_data2 <- simulation(seed = 23, n = 50)
+sim_data2
 
 sim_data3 <- simulation(
   data = heart_dat,
@@ -68,8 +77,14 @@ sim_dat4 <- simulation(
   catVars = c("sex","chestPT","exerAngina")
 )
 
+sim_dat5 <- simulation(
+  data = heart_dat,
+  n = 100,
+  contVars = c("age", "cholesterol","restingBP"),
+  catVars = c("sex","chestPT","exerAngina"),
+  sigma = cov(heart_dat[, c("age", "cholesterol","restingBP")])
+ )
 
-sim_mtcars <- simulation(data = mtcars, outcome = "am")
 }
 \author{
 Faridat Adeniji - <\email{faridaadeniji@gmail.com}>
