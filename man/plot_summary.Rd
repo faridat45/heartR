@@ -21,7 +21,7 @@ frame. The vertical lines shows the mean and the median, and the plot is
 converted to an interactive plot using \pkg{plotly}.
 }
 \examples{
-plot_summary(heart_dat, "Age")
+plot_summary(heart_dat, "age")
 
 
 }

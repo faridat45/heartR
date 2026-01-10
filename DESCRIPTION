@@ -1,6 +1,6 @@
 Type: Package
 Package: HeartR
-Title: Exploring and Simulating Heart Disease Data.
+Title: Exploring and Simulating Heart Disease Data
 Version: 0.1.0
 Authors@R: c(
     person("Faridat", "Adeniji", , "faridaadeniji@gmail.com", role = c("aut", "cre")),
@@ -8,10 +8,7 @@ Authors@R: c(
     person("Irene", "Adetola", , "Irene.adetola.2021@mumail.ie", role = "aut"),
     person("Boluwatife", "Farombi", , "boluwatife.farombi.2023@mumail.ie", role = "aut")
   )
-Description: HeartR is a R package created for exploring, summarising and stimulating the heart disease data.
-it provides functions for data visualization, generating synthetic data and providing summaring statistic.
-It's useful for teaching allowing users to work with realistic health-related data without relying on real patients data. 
-    Continuation lines should be indented.
+Description: HeartR is a R package created for exploring, summarising and stimulating the heart disease data. It provides functions for data visualization, generating synthetic data and providing summaring statistic. It's useful for teaching allowing users to work with realistic health-related data without relying on real patients data. 
 License: GPL (>= 3)
 URL: https://github.com/faridat45/HeartR.git
 Depends: 
