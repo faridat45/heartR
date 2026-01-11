@@ -13,18 +13,24 @@
 )
 }
 \arguments{
-\item{x}{An object of class \code{"summ_heartr"} outputted from the summ_heartr function.}
+\item{x}{An object of class \code{"summ_heartr"} outputted from the
+summ_heartr function.}
 
-\item{bordercolour}{Colour of the cell borders. Must be in quotations. Default colour of pink is used.}
+\item{bordercolour}{Colour of the cell borders. Must be in quotations.
+Default colour of pink is used.}
 
-\item{fillcolour}{Colour of the Variable cells. Must be in quotations. Default colour of #FFEDFB is used}
+\item{fillcolour}{Colour of the Variable cells. Must be in quotations.
+Default colour of #FFEDFB is used}
 
-\item{font}{Google style used in the table. Must be a Google font which can be found \href{https://fonts.google.com/}{here}.}
+\item{font}{Google style used in the table. Must be a Google font which can
+be found \href{https://fonts.google.com/}{here}.}
 
-\item{...}{Catches unused arguments to \code{print} (not currently implemented).}
+\item{...}{Catches unused arguments to \code{print} (not currently
+implemented).}
 }
 \value{
-An aesthetically pleasing table nicely displaying the summary statistics.
+An aesthetically pleasing table nicely displaying the summary
+statistics.
 }
 \description{
 Provides a nice customisable table for the output of the summ_heartr function.

@@ -10,15 +10,20 @@ summ_heartr(...)
 \item{...}{One or more numeric variables.}
 }
 \value{
-An object of class summ_heartr containing the following statistics for each input variable:
-mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard deviation and variance.
+An object of class summ_heartr containing the following statistics
+for each input variable:
+mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard
+deviation and variance.
 }
 \description{
-Creates a list of the following summary statistics for one or more numeric variables:
-mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard deviation and variance.
+Creates a list of the following summary statistics for one or more numeric
+variables:
+mean, minimum, 1st quartile, median, 3rd quartile, maximum, standard
+deviation and variance.
 }
 \note{
-A dedicated \code{\link{print.summ_heartr}} method is provided for objects of class \code{"summ_heartr"}.
+A dedicated \code{\link{print.summ_heartr}} method is provided for
+objects of class \code{"summ_heartr"}.
 }
 \examples{
 summ_heartr(heart_dat$age, heart_dat$cholesterol)

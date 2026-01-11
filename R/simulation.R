@@ -21,10 +21,12 @@ utils::globalVariables(c("p_hat","heart_dat"))
 #' @param outcome name of the binary outcome variable in \code{data}
 #' @param thres numeric threshold between 0 and 1 used to convert predicted
 #' probabilities into binary outcomes. Default set to 0.5.
-#' @param mu optional named vector of means used to simulate continuous variables
+#' @param mu optional named vector of means used to simulate continuous
+#' variables
 #' @param sigma optional covariance matrix to simulate continuous variables.
 #'
-#' @return A synthetic dataset with continuous, categorical and outcome variables
+#' @return A synthetic dataset with continuous, categorical and outcome
+#' variables
 #'
 #' @importFrom MASS "mvrnorm"
 #' @importFrom stats "glm" "cov" "predict" "binomial" "as.formula"
@@ -141,7 +143,9 @@ simulation <- function(seed = 403, n = NULL,
 
   # applying bounds
   for(x in contVars){
-    contData[[x]] <- bounds(contData[[x]], bounds2[[x]]["min"], bounds2[[x]]["max"])
+    contData[[x]] <- bounds(contData[[x]],
+                            bounds2[[x]]["min"],
+                            bounds2[[x]]["max"])
   }
 
   # automatically finding categorical variables
@@ -149,7 +153,8 @@ simulation <- function(seed = 403, n = NULL,
     catVars <- data |>
       dplyr::select(where(\(x) is.factor(x) || is.character(x)))|>
       names()
-    catVars <- dplyr::setdiff(catVars, outcome) #remove outcome var in case it's in catVars
+    #remove outcome var in case it's in catVars
+    catVars <- dplyr::setdiff(catVars, outcome)
   }
 
   catData <- lapply(catVars, function(x){
@@ -178,13 +183,17 @@ simulation <- function(seed = 403, n = NULL,
   if(!is.factor(data[[outcome]])){
     data[[outcome]] <- as.factor(data[[outcome]])
   }
-  formula <- stats::as.formula(paste(outcome,"~",paste(predictors,collapse="+")))
+  formula <-stats::as.formula(paste(outcome,"~",paste(predictors,collapse="+")))
   outcome_model <- stats::glm(formula, family = binomial, data = data)
 
   outcomeLevels <- levels(data[[outcome]])
 
-  synthetic_data$p_hat <- stats::predict(outcome_model, newdata = synthetic_data, type = "response")
-  synthetic_data[[outcome]] <- factor(ifelse(synthetic_data$p_hat >= thres, outcomeLevels[2], outcomeLevels[1]))
+  synthetic_data$p_hat <- stats::predict(outcome_model,
+                                         newdata = synthetic_data,
+                                         type = "response")
+  synthetic_data[[outcome]] <- factor(ifelse(synthetic_data$p_hat >= thres,
+                                             outcomeLevels[2],
+                                             outcomeLevels[1]))
   synthetic_data <- synthetic_data |>
     dplyr::select(-p_hat)
 

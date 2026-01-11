@@ -10,17 +10,23 @@ A data frame with 745 observations and 12 variables:
  \item{age}{age of the patient (numeric)}
  \item{sex}{sex of the patient (\code{1 = male, 0 = female})}
  \item{chestPT}{type of chest pain
- (\code{1 = typical angina, 2 = atypical angina, 3 = non-anginal pain, 4 = asymptomatic})}
+ (\code{1 = typical angina, 2 = atypical angina, 3 = non-anginal pain,
+ 4 = asymptomatic})}
  \item{restingBP}{resting blood pressure in mm Hg (numeric)}
  \item{cholesterol}{serum cholesterol in mg/dl (numeric)}
  \item{fastingBS}{fasting blood sugar in mg/dl
  (\code{0 = fbs <= 120 mg/dl, 1 = fbs > 120 mg/dl})}
- \item{restingECG}{resting electrocardiographic results, records the electrical
- signals in the heart (\code{0 = normal heart electrical activity, 1 = ST-T abnormality
- (suggests heart isn't getting enough oxygen),  2 = left ventricular hypertrophy
- pattern (suggests the heart's main pumping chamber is working harder than usual)})}
+ \item{restingECG}{resting electrocardiographic results, records the
+ electrical
+ signals in the heart (\code{0 = normal heart electrical activity, 1 =
+ ST-T abnormality
+ (suggests heart isn't getting enough oxygen),  2 = left ventricular
+ hypertrophy
+ pattern (suggests the heart's main pumping chamber is working harder than
+ usual)})}
  \item{maxHeartRate}{maximum heart rate achieved (numeric)}
- \item{exerAngina}{exercise induced angina(tells you whether the patient experienced chest pain during exercise)
+ \item{exerAngina}{exercise induced angina(tells you whether the patient
+ experienced chest pain during exercise)
  \code{1 = yes, 0 = no} }
  \item{oldpeak}{ST depression induced by exercise relative to rest (numeric)}
  \item{STslope}{shows how the ecg line changes at peak exercise (i.e.  when
@@ -38,7 +44,8 @@ Heart disease dataset containing clinical information on 745 patients
 (563 male and 182 female)
 }
 \details{
-This dataset is adjusted from the Heart Disease dataset at the UCI Machine Learning Repository:
+This dataset is adjusted from the Heart Disease dataset at the UCI Machine
+Learning Repository:
 https://archive.ics.uci.edu/dataset/45/heart+disease
 }
 \keyword{datasets}

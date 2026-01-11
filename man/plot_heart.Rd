@@ -3,10 +3,11 @@
 \name{plot_heart}
 \alias{plot_heart}
 \title{Heart Data Plotting Function
-Aim: to Visualize the heart data and explore how predictors relate to heart disease.
+Aim: to Visualize the heart data and explore how predictors relate to heart
+disease.
 `plot_heart` allows users to explore their heart disease dataset visually.
-It provides multiple types of plots to investigate relationships between predictors.
-and the response variable (`Heart_Disease`).
+It provides multiple types of plots to investigate relationships between
+predictors and the response variable (`Heart_Disease`).
 Also able to explore relationship between predictors as well.}
 \usage{
 plot_heart(
@@ -23,15 +24,20 @@ plot_heart(
 \describe{
   \item{"hist"}{Histogram with density overlay for a numeric predictor.}
   \item{"density"}{Density plot for a numeric predictor.}
-  \item{"scatter"}{Scatter plot of a numeric predictor vs the response variable.}
-  \item{"boxplot"}{Boxplot of a categorical predictor vs the response variable.}
-  \item{"correlation"}{Correlation matrix heatmap for all numeric predictors.}
+  \item{"scatter"}{Scatter plot of a numeric predictor vs the response
+  variable.}
+  \item{"boxplot"}{Boxplot of a categorical predictor vs the response
+  variable.}
+  \item{"correlation"}{Correlation matrix heatmap for all numeric
+  predictors.}
 }}
 
-\item{var_x}{represent the character string that specify variable to plot on the x-axis.
+\item{var_x}{represent the character string that specify variable to plot on
+the x-axis.
 is required for "hist", "density", "scatter", and "boxplot" types.}
 
-\item{var_y}{Optional character string that specify variable to plot on the y-axis.
+\item{var_y}{Optional character string that specify variable to plot on the
+y-axis.
 if not inputted, the response variable is used by default}
 }
 \value{
@@ -39,17 +45,22 @@ A ggplot object showing the requested visualization.
 }
 \description{
 Heart Data Plotting Function
-Aim: to Visualize the heart data and explore how predictors relate to heart disease.
+Aim: to Visualize the heart data and explore how predictors relate to heart
+disease.
 `plot_heart` allows users to explore their heart disease dataset visually.
-It provides multiple types of plots to investigate relationships between predictors.
-and the response variable (`Heart_Disease`).
+It provides multiple types of plots to investigate relationships between
+predictors and the response variable (`Heart_Disease`).
 Also able to explore relationship between predictors as well.
 }
 \details{
-This function is designed to help explore which predictors have an impact heart disease.
-- For numeric predictors, you can visualize distributions, density, and relationship with heart disease.
-- For categorical predictors, you can see differences in heart disease rates across groups.
-- The correlation matrix helps identify relationships between numeric predictors.
+This function is designed to help explore which predictors have an impact
+heart disease.
+- For numeric predictors, you can visualize distributions, density, and
+relationship with heart disease.
+- For categorical predictors, you can see differences in heart disease rates
+across groups.
+- The correlation matrix helps identify relationships between numeric
+predictors.
 (1 = highest, 0 = lowest)
 }
 \examples{
