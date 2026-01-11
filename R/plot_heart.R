@@ -17,7 +17,7 @@ utils::globalVariables(c("..density..","Var1","Var2","Freq"))
 #' @param var_x represent the character string that specify variable to plot on the x-axis.
 #' is required for "hist", "density", "scatter", and "boxplot" types.
 #' @param var_y Optional character string that specify variable to plot on the y-axis.
-#' if not inputed, the response variable is used by default
+#' if not inputted, the response variable is used by default
 #' @return A ggplot object showing the requested visualization.
 #'
 #' @details
