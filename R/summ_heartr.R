@@ -29,10 +29,10 @@
 summ_heartr <- function(...){
   input <- list(...)
 
-  if(!all(sapply(input, is.numeric))) {stop("argument is not numeric")}
+  if(!all(vapply(input, is.numeric))) {stop("argument is not numeric")}
 
-  names1 <- sapply(substitute(list(...))[-1], deparse)
-  newnames <- sapply(names1, function(y){
+  names1 <- vapply(substitute(list(...))[-1], deparse)
+  newnames <- vapply(names1, function(y){
     splitname <- strsplit(y, "\\$")[[1]]
     utils::tail(splitname, 1)
   })
