@@ -1,30 +1,40 @@
 utils::globalVariables(c("..density..","Var1","Var2","Freq"))
 #' Heart Data Plotting Function
-#' Aim: to Visualize the heart data and explore how predictors relate to heart disease.
+#' Aim: to Visualize the heart data and explore how predictors relate to heart
+#' disease.
 #' `plot_heart` allows users to explore their heart disease dataset visually.
-#' It provides multiple types of plots to investigate relationships between predictors.
-#' and the response variable (`Heart_Disease`).
+#' It provides multiple types of plots to investigate relationships between
+#' predictors and the response variable (`Heart_Disease`).
 #' Also able to explore relationship between predictors as well.
 #' @param data is the dataset.
 #' @param type indicate which type of plot to generate. Options are:
 #'   \describe{
 #'     \item{"hist"}{Histogram with density overlay for a numeric predictor.}
 #'     \item{"density"}{Density plot for a numeric predictor.}
-#'     \item{"scatter"}{Scatter plot of a numeric predictor vs the response variable.}
-#'     \item{"boxplot"}{Boxplot of a categorical predictor vs the response variable.}
-#'     \item{"correlation"}{Correlation matrix heatmap for all numeric predictors.}
+#'     \item{"scatter"}{Scatter plot of a numeric predictor vs the response
+#'     variable.}
+#'     \item{"boxplot"}{Boxplot of a categorical predictor vs the response
+#'     variable.}
+#'     \item{"correlation"}{Correlation matrix heatmap for all numeric
+#'     predictors.}
 #'   }
-#' @param var_x represent the character string that specify variable to plot on the x-axis.
+#' @param var_x represent the character string that specify variable to plot on
+#' the x-axis.
 #' is required for "hist", "density", "scatter", and "boxplot" types.
-#' @param var_y Optional character string that specify variable to plot on the y-axis.
+#' @param var_y Optional character string that specify variable to plot on the
+#' y-axis.
 #' if not inputted, the response variable is used by default
 #' @return A ggplot object showing the requested visualization.
 #'
 #' @details
-#' This function is designed to help explore which predictors have an impact heart disease.
-#' - For numeric predictors, you can visualize distributions, density, and relationship with heart disease.
-#' - For categorical predictors, you can see differences in heart disease rates across groups.
-#' - The correlation matrix helps identify relationships between numeric predictors.
+#' This function is designed to help explore which predictors have an impact
+#' heart disease.
+#' - For numeric predictors, you can visualize distributions, density, and
+#' relationship with heart disease.
+#' - For categorical predictors, you can see differences in heart disease rates
+#' across groups.
+#' - The correlation matrix helps identify relationships between numeric
+#' predictors.
 #' (1 = highest, 0 = lowest)
 #'
 #' @examples
@@ -39,14 +49,17 @@ utils::globalVariables(c("..density..","Var1","Var2","Freq"))
 #' # Correlation matrix
 #' plot_heart(heart, "correlation")
 #'
-#' @importFrom ggplot2 "ggplot" "aes" "geom_histogram" "geom_density" "geom_point" "geom_boxplot"
-#' @importFrom ggplot2 "geom_tile" "geom_text" "scale_fill_gradient2" "labs" "theme_minimal" "aes_string"
+#' @importFrom ggplot2 "ggplot" "aes" "geom_histogram" "geom_density"
+#' "geom_point" "geom_boxplot"
+#' @importFrom ggplot2 "geom_tile" "geom_text" "scale_fill_gradient2" "labs"
+#' "theme_minimal" "aes_string"
 #' @importFrom stats "cor"
 #' @export
 
 
 plot_heart <- function(data,
-                       type = c("hist", "density", "scatter", "boxplot", "correlation"),
+                       type = c("hist", "density", "scatter", "boxplot",
+                                "correlation"),
                        var_x = NULL,
                        var_y = NULL) {
 
