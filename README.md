@@ -16,7 +16,7 @@ one S3 method:
 3.  `summ_heartr`: for creating a list of summary statistics that will
     be used further in the `print.summ_heartr` method
 4.  An S3 `print.summ_heartr` method: for providing an appealing
-     customisable table for the output of the summ_heartr function.
+    customisable table for the output of the summ_heartr function.
 5.  `summ_heartrplot`: for generating interactive plots of summary
     statistics that was gotten from `print.summ_heartr`.
 
@@ -47,12 +47,12 @@ sim_data <- simulation(
 )
 utils::head(sim_data)
 #>   age cholesterol restingBP sex chestPT exerAngina target
-#> 1  67         254       146   0       2          0      0
-#> 2  49         290       128   0       4          0      0
-#> 3  49         304       165   1       2          0      0
-#> 4  59         213       135   1       4          0      1
-#> 5  56         314       135   0       3          0      0
-#> 6  53         181       136   1       4          1      1
+#> 1  62         255       116   0       2          0      0
+#> 2  51         289       142   0       4          0      0
+#> 3  38         306       109   1       2          0      0
+#> 4  58         213       127   1       4          0      1
+#> 5  56         314       134   0       3          0      0
+#> 6  51         181       126   1       4          1      1
 ```
 
 From this dataset, plots can be generated using the `plot_heart`
@@ -60,4 +60,4 @@ function:
 
 <img src="man/figures/README-pressure-1.png" width="100%" />
 
-A more detailed introduction is provided in the heartR vignette
+A more detailed introduction is provided in the HeartR vignette

@@ -64,4 +64,4 @@ From this dataset, plots can be generated using the `plot_heart` function:
 plot_heart(sim_data, "boxplot", var_x = "age", var_y = "target")
 ```
 
-A more detailed introduction is provided in the heartR vignette
+A more detailed introduction is provided in the HeartR vignette
